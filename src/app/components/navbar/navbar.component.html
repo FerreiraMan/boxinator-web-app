@@ -1,24 +1,24 @@
 <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
-    <div class="container">
-      <a class="navbar-brand" href="#">Boxinator</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/welcome">Boxinator</a>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExample01">
-        <ul class="navbar-nav me-auto mb-2">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav me-auto mb-2">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
-            </li>
-          </ul>
-      </div>
+    <div class="navbar-collapse collapse" id="navbarsExample01">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li *ngIf="token" class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/home">Home</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+        <li *ngIf="!token" class="nav-item">
+          <a role="button" class="nav-link" (click)="login()">Login</a>
+        </li>
+        <li *ngIf="token" class="nav-item">
+          <a role="button" class="nav-link" (click)="logout()">Logout</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
