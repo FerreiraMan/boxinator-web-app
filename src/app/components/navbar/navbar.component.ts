@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from 'src/app/sso-config';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
+import keycloak from 'src/keycloak';
  
 @Component({
   selector: 'app-navbar',
@@ -26,17 +27,26 @@ export class NavbarComponent implements OnInit {
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
-  login() {
-    this.oauthService.initCodeFlow();
+  handleLogin() {
+    //this.oauthService.initCodeFlow();
+    keycloak.login()
   }
 
-  logout() {
-    this.oauthService.logOut();
+  handleLogout() {
+    //this.oauthService.logOut();
+    keycloak.logout()
   }
 
   get token(){
     let claims: any = this.oauthService.getIdentityClaims();
     return claims ? claims : null;
+  }
+
+  handleToken() {
+    if (keycloak.token != null) {
+      return true;
+    }
+    return null
   }
 
 }
