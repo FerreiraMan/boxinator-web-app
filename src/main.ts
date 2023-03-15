@@ -1,7 +1,7 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
-import { initialize } from './keycloak';
+import keycloak, { initialize } from './keycloak';
 
 initialize()
 .then(() => {
