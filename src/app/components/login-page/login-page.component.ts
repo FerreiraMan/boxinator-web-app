@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { authCodeFlowConfig } from 'src/app/sso-config';
-import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
+import { Router } from '@angular/router';
+import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import keycloak from 'src/keycloak';
+import { authCodeFlowConfig } from 'src/app/sso-config';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
-})  
-export class NavbarComponent implements OnInit {
+  selector: 'app-login.page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css']
+})
+export class LoginComponent implements OnInit {
 
   name: string = "";
 
   constructor (
     private oauthService: OAuthService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -29,9 +30,10 @@ export class NavbarComponent implements OnInit {
     //this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
-  handleLogout() {
-    //this.oauthService.logOut();
-    keycloak.logout()
+  handleLogin() {
+    keycloak.redirectUri = window.location.origin + "/profile";      
+    keycloak.login().then(() => {
+    });
   }
 
   get token(){
@@ -47,3 +49,4 @@ export class NavbarComponent implements OnInit {
   }
 
 }
+

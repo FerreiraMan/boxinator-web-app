@@ -5,29 +5,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { WelcomeComponent } from './components/welcome/welcome.component';
+import { LoginComponent } from './components/login-page/login-page.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { AuthGuard } from './auth.guard';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { AppRoutingModule } from './app-routing.module';
 
-const routes: Routes = [
-  { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
-  { path: "welcome", component: WelcomeComponent },
-  { path: "", redirectTo: "welcome", pathMatch: "full"},
-  { path: "**", redirectTo: "welcome", pathMatch: "full"}
-]
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    WelcomeComponent
+    LoginComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     HttpClientModule,
     OAuthModule.forRoot()
   ],

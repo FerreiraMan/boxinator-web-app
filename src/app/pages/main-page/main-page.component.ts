@@ -3,16 +3,17 @@ import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from 'src/app/sso-config';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-main-page',
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css']
 })
-export class HomeComponent implements OnInit{
+export class MainPageComponent implements OnInit{
 
   name: string = "";
 
+  constructor ( ) { }
+
   ngOnInit(): void {
+
   }
-
-
 }
