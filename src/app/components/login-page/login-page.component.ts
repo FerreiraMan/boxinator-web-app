@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
     this.configureSingleSignOn();
     //const userClaims: any = this.oauthService.getIdentityClaims();
     //this.name = userClaims.name ? userClaims.name : "";
+    console.log("idToken1: " +  this.oauthService.getIdToken());
+    console.log("userprofile1: " +  this.oauthService.loadUserProfile());
   }
 
   configureSingleSignOn() {
@@ -34,6 +36,8 @@ export class LoginComponent implements OnInit {
     keycloak.redirectUri = window.location.origin + "/profile";      
     keycloak.login().then(() => {
     });
+    console.log("idToken2: " +  this.oauthService.getIdToken());
+    console.log("userprofile2: " +  this.oauthService.loadUserProfile());
   }
 
   get token(){
