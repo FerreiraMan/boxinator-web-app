@@ -1,3 +1,24 @@
-<p>profile-page works!</p>
-
-  
+<form #profileForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+        <p>First Name: {{ profile.firstName }}</p>
+        <p>Last Name: {{ profile.lastName }}</p>
+        <p>Email: {{ profile.email }}</p>
+      </div>
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth</label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required [(ngModel)]="profile.dateOfBirth">
+    </div>
+    <div class="form-group">
+      <label for="countryOfResidence">Country of Residence</label>
+      <input type="text" class="form-control" id="countryOfResidence" name="countryOfResidence" required [(ngModel)]="profile.countryOfResidence">
+    </div>
+    <div class="form-group">
+      <label for="zipCode">Zip Code / Postal Code</label>
+      <input type="text" class="form-control" id="zipCode" name="zipCode" required [(ngModel)]="profile.zipCode">
+    </div>
+    <div class="form-group">
+      <label for="contactNumber">Contact Number</label>
+      <input type="text" class="form-control" id="contactNumber" name="contactNumber" required [(ngModel)]="profile.contactNumber">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Save</button>
+  </form>
