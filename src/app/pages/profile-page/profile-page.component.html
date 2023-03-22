@@ -4,17 +4,18 @@
         <p>Last Name: {{ profile.lastName }}</p>
         <p>Email: {{ profile.email }}</p>
       </div>
-    <div class="form-group">
-      <label for="dateOfBirth">Date of Birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required [(ngModel)]="profile.dateOfBirth">
-    </div>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of Birth</label>
+        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required [(ngModel)]="profile.dateOfBirth" #dob>
+        <span *ngIf="dob.value" class="formatted-date">{{ dob.value | date:'dd/MM/yyyy' }}</span>
+      </div>
     <div class="form-group">
       <label for="countryOfResidence">Country of Residence</label>
       <input type="text" class="form-control" id="countryOfResidence" name="countryOfResidence" required [(ngModel)]="profile.countryOfResidence">
     </div>
     <div class="form-group">
-      <label for="zipCode">Zip Code / Postal Code</label>
-      <input type="text" class="form-control" id="zipCode" name="zipCode" required [(ngModel)]="profile.zipCode">
+      <label for="postalCode">Postal Code</label>
+      <input type="text" class="form-control" id="postalCode" name="postalCode" required [(ngModel)]="profile.postalCode">
     </div>
     <div class="form-group">
       <label for="contactNumber">Contact Number</label>

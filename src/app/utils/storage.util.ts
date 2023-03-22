@@ -1,21 +1,32 @@
 export class StorageUtil {
-    // Function that saves the current session storage
-    public static storageSave<T>(key: string, value: T): void {
+
+    public static sessionStorageSave<T>(key: string, value: any): void {
+        // console.log(key, value)
         sessionStorage.setItem(key, JSON.stringify(value));
     }
-
-    // Function that reads from the session storage
-    public static storageRead<T>(key: string): T | undefined {
+    
+    public static sessionStorageRead<T>(key: string): T | undefined {
         const storedValue = sessionStorage.getItem(key);
         try {
-            if (storedValue) {
-                return JSON.parse(storedValue) as T;
-            }
-            return undefined;
+          if (storedValue) {
+            return JSON.parse(storedValue) as T;
+          }
+          return undefined;
+        } catch (e) {
+          sessionStorage.removeItem(key);
+          return undefined;
         }
-        catch(e) { // Removes item from session storage
-            sessionStorage.removeItem(key);
-            return undefined;
-        }
+    
     }
+
+    public static sessionStorageRemove<T>(key: string): T | undefined {
+      try {
+        sessionStorage.removeItem(key);
+        return undefined;
+      } catch (e) {
+        console.log(`${key} does not exist`)
+        return undefined;
+      }
+  
+  }
 }
