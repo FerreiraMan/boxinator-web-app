@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   handleToken() {
-    if (keycloak.token != null) {
+    if (keycloak.token != null) {      
       return true;
     }
     return null
