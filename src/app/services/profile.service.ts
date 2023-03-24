@@ -14,7 +14,7 @@ const httpOptions = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:4200',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   })
 };
 
@@ -45,7 +45,7 @@ export class ProfileService {
   }
 
   initalRegistration (firstRegistration: InitialRegister): Observable<InitialRegister> {
-    console.log("registo inicial aqui");
+    //console.log("registo inicial aqui");
     const url = `${apiUsers}/auth/register`;
     return this.http.post<InitialRegister>(url, firstRegistration);
   }
