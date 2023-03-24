@@ -1,7 +1,8 @@
 export enum Tiers {
-    BASIC = 0,
-    HUMBLE = 1,
-    DELUXE = 2,
-    PREMIUM = 3,
-  }
+  BASIC = "BASIC",
+  HUMBLE = "HUMBLE",
+  DELUXE = "DELUXE",
+  PREMIUM = "PREMIUM",
+}
+
   

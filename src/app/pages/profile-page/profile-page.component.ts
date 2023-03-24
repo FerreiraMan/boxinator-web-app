@@ -40,7 +40,7 @@ export class ProfilePageComponent implements OnInit {
     firstName: 'default',
     lastName: 'default',
     email: '',
-    password: "123123123",
+    password: '123123123',
     dateOfBirth: '2023-03-23',
     countryOfResidence: 'default',
     postalCode: 'default',
@@ -72,6 +72,7 @@ export class ProfilePageComponent implements OnInit {
       (loggedProfile) => {
         console.log("success in first regi in")
         this.loggedUser.email = this.profile.email;
+        console.log('loggedUser: ', this.loggedUser);
         this.profileService.loginProfile(this.loggedUser).subscribe(
           (loggedProfile) => {
             console.log("success in logging in");
@@ -107,6 +108,7 @@ export class ProfilePageComponent implements OnInit {
         console.log("error in first regi in user", error);
         // Always try to log in the user, even if registration failed
         this.loggedUser.email = this.profile.email;
+        console.log('loggedUser: ', this.loggedUser);
         this.profileService.loginProfile(this.loggedUser).subscribe(
           (loggedProfile) => {
             console.log("success in logging in");
