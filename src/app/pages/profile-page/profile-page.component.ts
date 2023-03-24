@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { ProfileType } from 'src/app/enums/profile-type.enum';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile.service';
 import { StorageUtil } from 'src/app/utils/storage.util';
 import keycloak from 'src/keycloak';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { environment } from 'environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
+import { LoggedUser } from 'src/app/models/loggedUser';
+import { InitialRegister } from 'src/app/models/initialRegis';
+import { GetterProfile } from 'src/app/models/GetterProfile';
 
 
 @Component({
@@ -18,47 +16,144 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
+
   profile: Profile = {
     //id: '',
     firstName: '',
     lastName: '',
     email: '',
     password: '123123123',
-    countryOfResidence: '',
     dateOfBirth: null,
+    countryOfResidence: '',
     postalCode: '',
     contactNumber: '',
     //accountType: ProfileType.REGISTERED_USER,
     //shipments: null
   };
 
+  loggedUser: LoggedUser = {
+    email: '',
+    password: '123123123',
+  }
 
+  firstRegistration: InitialRegister = {
+    firstName: 'default',
+    lastName: 'default',
+    email: '',
+    password: "123123123",
+    dateOfBirth: '2023-03-23',
+    countryOfResidence: 'default',
+    postalCode: 'default',
+    contactNumber: 'default',
+  }
+
+  getterProfile: GetterProfile = {
+    countryOfResidence: "",
+    postalCode: "",
+    contactNumber: "",
+  }
+   
   constructor(
     private oauthService: OAuthService,
     private profileService: ProfileService,
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
   ) {}
 
   ngOnInit(): void {
     const id = keycloak.tokenParsed?.sub;
-    //console.log("id: " + id);
-        
+
     this.profile.firstName = keycloak.tokenParsed?.given_name ?? null;
     this.profile.lastName = keycloak.tokenParsed?.family_name ?? null;
     this.profile.email = keycloak.tokenParsed?.email ?? null;
-    if (id) {
-      this.profileService.getProfile(id).subscribe(profile => {
-        if (profile) {
-          // Profile exists on the server, fetch and fill out the form
-          this.profile = profile;
-        } else {
-          // Profile does not exist on the server, keep form empty
-        }
-        StorageUtil.sessionStorageSave('userId', id); // store user's id in local storage
-      });
-    }
-}
+    const registrationComplete = localStorage.getItem(`${this.profile.email}_registrationComplete`);
+  
+    this.firstRegistration.email = keycloak.tokenParsed?.email ?? null;
+    this.profileService.initalRegistration(this.firstRegistration).subscribe(
+      (loggedProfile) => {
+        console.log("success in first regi in")
+        this.loggedUser.email = this.profile.email;
+        this.profileService.loginProfile(this.loggedUser).subscribe(
+          (loggedProfile) => {
+            console.log("success in logging in");
+            console.log("fetchedProfile: ");
+            
 
+            this.profileService.getProfile().subscribe((getter: GetterProfile) => {
+              console.log("getterprofile: " + getter.contactNumber);
+              this.profile.contactNumber = getter.contactNumber;
+            }, (error) => {
+              console.log("getProfile() error:", error);
+            });
+
+
+
+          },
+          (error) => {
+            console.log("error in logging in user", error);
+
+            this.profileService.getProfile().subscribe((getter: GetterProfile) => {
+              console.log("getterprofile: " + getter.contactNumber);
+              this.profile.contactNumber = getter.contactNumber;
+            }, (error) => {
+              console.log("getProfile() error:", error);
+            });
+
+
+
+          }
+        );
+      },
+      (error) => {
+        console.log("error in first regi in user", error);
+        // Always try to log in the user, even if registration failed
+        this.loggedUser.email = this.profile.email;
+        this.profileService.loginProfile(this.loggedUser).subscribe(
+          (loggedProfile) => {
+            console.log("success in logging in");
+            console.log("fetchedProfile: ");
+          
+
+            this.profileService.getProfile().subscribe((getter: GetterProfile) => {
+              console.log("getterprofile: " + getter.contactNumber);
+              this.profile.contactNumber = getter.contactNumber;
+            }, (error) => {
+              console.log("getProfile() error:", error);
+            });
+
+
+
+          },
+          (error) => {
+            console.log("error in logging in user", error);
+
+            this.profileService.getProfile().subscribe((getter: GetterProfile) => {
+              console.log("getterprofile: " + getter.contactNumber);
+              this.profile.contactNumber = getter.contactNumber;
+            }, (error) => {
+              console.log("getProfile() error:", error);
+            });
+
+
+          }
+        );
+      }
+    );
+  }
+  
+  /*
+  finishLogIn() {
+    this.profileService.loginProfile(this.loggedUser);    
+  }
+  
+  addContact() {
+    this.profileService.getProfile().subscribe((getter: GetterProfile) => {
+      console.log("getterprofile: " + getter.contactNumber);
+      this.profile.contactNumber = getter.contactNumber;
+    }, (error) => {
+      console.log("getProfile() error:", error);
+    });
+  }
+  */
 
 onSubmit() {
   const userId = StorageUtil.sessionStorageRead('userId');
@@ -76,19 +171,18 @@ if (typeof userId === 'string' && userId.length > 0) {
   );
 } else {
   // create new profile
-  this.profileService.createProfile(this.profile).subscribe(
-    (createdProfile) => {
-      StorageUtil.sessionStorageSave('mail', createdProfile.email); // store user's mail in local storage
+  this.profileService.updateProfile(this.profile).subscribe(
+    (updatedProfile) => {
+      StorageUtil.sessionStorageSave('mail', updatedProfile.email); // store user's mail in local storage
       // Handle success case
-      console.log("sucess in creating user");
+      console.log("sucess in updating user");
     },
     (error) => {
       // Handle error case
       console.log(this.profile);
-      console.log("error in creating user", error);
+      console.log("error in updating user", error);
     }
   );
 }
 }
 }
-

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Add Shipment</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Receiver Name</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Weight (kg)</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Box Color</mat-label>
+      <input matInput type="color">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Destination Country</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary">Add Shipment</button>
+</mat-dialog-actions>
