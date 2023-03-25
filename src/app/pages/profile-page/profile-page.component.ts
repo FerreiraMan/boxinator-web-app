@@ -51,6 +51,7 @@ export class ProfilePageComponent implements OnInit {
     countryOfResidence: "",
     postalCode: "",
     contactNumber: "",
+    dateOfBirth: null
   }
    
   constructor(
@@ -70,20 +71,21 @@ export class ProfilePageComponent implements OnInit {
     this.firstRegistration.email = keycloak.tokenParsed?.email ?? null;
     this.profileService.initalRegistration(this.firstRegistration).subscribe(
       (loggedProfile) => {
-        console.log("success in first regi in")
+        //console.log("success in first regi in")
         this.loggedUser.email = this.profile.email;
-        console.log('loggedUser: ', this.loggedUser);
+        //console.log('loggedUser: ', this.loggedUser);
         this.profileService.loginProfile(this.loggedUser).subscribe(
           (loggedProfile) => {
-            console.log("success in logging in");
-            console.log("fetchedProfile: ");
+            //console.log("success in logging in");
+            //console.log("fetchedProfile: ");
             
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
-              console.log("getterprofile: " + getter.contactNumber);
+              //console.log("getterprofile: " + getter.contactNumber);
               this.profile.countryOfResidence = getter.countryOfResidence;
               this.profile.postalCode = getter.postalCode;
               this.profile.contactNumber = getter.contactNumber;
+              this.profile.dateOfBirth = getter.dateOfBirth;
             }, (error) => {
               console.log("getProfile() error:", error);
             });
@@ -92,13 +94,15 @@ export class ProfilePageComponent implements OnInit {
 
           },
           (error) => {
-            console.log("error in logging in user", error);
+            //console.log("error in logging in user", error);
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
-              console.log("getterprofile: " + getter.contactNumber);
+              //console.log("getterprofile: " + getter.contactNumber);
               this.profile.countryOfResidence = getter.countryOfResidence;
               this.profile.postalCode = getter.postalCode;
-              this.profile.contactNumber = getter.contactNumber;            }, (error) => {
+              this.profile.contactNumber = getter.contactNumber;
+              this.profile.dateOfBirth = getter.dateOfBirth;            
+            }, (error) => {
               console.log("getProfile() error:", error);
             });
 
@@ -108,21 +112,23 @@ export class ProfilePageComponent implements OnInit {
         );
       },
       (error) => {
-        console.log("error in first regi in user", error);
+        //console.log("error in first regi in user", error);
         // Always try to log in the user, even if registration failed
         this.loggedUser.email = this.profile.email;
-        console.log('loggedUser: ', this.loggedUser);
+        //console.log('loggedUser: ', this.loggedUser);
         this.profileService.loginProfile(this.loggedUser).subscribe(
           (loggedProfile) => {
-            console.log("success in logging in");
-            console.log("fetchedProfile: ");
+            //console.log("success in logging in");
+            //console.log("fetchedProfile: ");
           
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
-              console.log("getterprofile: " + getter.contactNumber);
+              //console.log("getterprofile: " + getter.contactNumber);
               this.profile.countryOfResidence = getter.countryOfResidence;
               this.profile.postalCode = getter.postalCode;
-              this.profile.contactNumber = getter.contactNumber;            }, (error) => {
+              this.profile.contactNumber = getter.contactNumber;
+              this.profile.dateOfBirth = getter.dateOfBirth;
+            }, (error) => {
               console.log("getProfile() error:", error);
             });
 
@@ -130,13 +136,15 @@ export class ProfilePageComponent implements OnInit {
 
           },
           (error) => {
-            console.log("error in logging in user", error);
+            //console.log("error in logging in user", error);
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
-              console.log("getterprofile: " + getter.contactNumber);
+              //console.log("getterprofile: " + getter.contactNumber);
               this.profile.countryOfResidence = getter.countryOfResidence;
               this.profile.postalCode = getter.postalCode;
-              this.profile.contactNumber = getter.contactNumber;            }, (error) => {
+              this.profile.contactNumber = getter.contactNumber;
+              this.profile.dateOfBirth = getter.dateOfBirth;
+            }, (error) => {
               console.log("getProfile() error:", error);
             });
 
@@ -146,21 +154,6 @@ export class ProfilePageComponent implements OnInit {
       }
     );
   }
-  
-  /*
-  finishLogIn() {
-    this.profileService.loginProfile(this.loggedUser);    
-  }
-  
-  addContact() {
-    this.profileService.getProfile().subscribe((getter: GetterProfile) => {
-      console.log("getterprofile: " + getter.contactNumber);
-      this.profile.contactNumber = getter.contactNumber;
-    }, (error) => {
-      console.log("getProfile() error:", error);
-    });
-  }
-  */
 
 onSubmit() {
   const userId = StorageUtil.sessionStorageRead('userId');
@@ -169,11 +162,11 @@ if (typeof userId === 'string' && userId.length > 0) {
   this.profileService.saveProfile(userId, this.profile).subscribe(
     (savedProfile) => {
       // Handle success case
-      console.log("sucess in updating user");
+      //console.log("sucess in updating user");
     },
     (error) => {
       // Handle error case
-      console.log("error in updated user");
+      //console.log("error in updated user");
     }
   );
 } else {
@@ -182,12 +175,12 @@ if (typeof userId === 'string' && userId.length > 0) {
     (updatedProfile) => {
       StorageUtil.sessionStorageSave('mail', updatedProfile.email); // store user's mail in local storage
       // Handle success case
-      console.log("sucess in updating user");
+      //console.log("sucess in updating user");
     },
     (error) => {
       // Handle error case
-      console.log(this.profile);
-      console.log("error in updating user", error);
+      //console.log(this.profile);
+      //console.log("error in updating user", error);
     }
   );
 }

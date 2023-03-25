@@ -3,6 +3,8 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from 'src/app/sso-config';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import keycloak from 'src/keycloak';
+import { ProfileService } from 'src/app/services/profile.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor (
     private oauthService: OAuthService,
+    private profileService: ProfileService
     ) { }
 
   ngOnInit(): void {
@@ -30,10 +33,21 @@ export class NavbarComponent implements OnInit {
   }
 
   handleLogout() {
-    //this.oauthService.logOut();
-    keycloak.logout()
+    this.profileService.logoutProfile().pipe(
+      tap((response) => {
+        //console.log('Session-based logout successful:', response);
+      }),
+    ).subscribe(() => {
+      keycloak.logout().then(() => {
+        //console.log('Keycloak logout successful');
+      }).catch((error) => {
+        //console.error('Keycloak logout error:', error);
+      });
+    }, (error) => {
+      //console.error('Session-based logout error:', error);
+    });
   }
-
+  
   get token(){
     let claims: any = this.oauthService.getIdentityClaims();
     return claims ? claims : null;
