@@ -3,6 +3,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
 .my-custom-dialog-class {
     margin: 0 auto;
-  }
+}
+
+.mat-mdc-form-field{
+  margin-right: 16px;
+}
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control.mdc-text-field__input[type=color]{
+  height: 12px !important;
+}
+
+.mdc-text-field--filled{
+  background-color: transparent !important;
+}
+.mat-mdc-form-field:hover .mat-mdc-form-field-focus-overlay{
+  opacity: 0 !important;
+}

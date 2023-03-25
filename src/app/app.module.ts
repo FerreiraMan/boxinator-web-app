@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
@@ -47,6 +48,7 @@ import { OrderModalComponent } from './components/order-modal/order-modal.compon
     BrowserAnimationsModule,
     MatSelectModule,
     MatOptionModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

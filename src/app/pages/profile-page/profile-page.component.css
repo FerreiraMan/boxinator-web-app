@@ -1,0 +1,4 @@
+.profileForm input:focus{
+    border-color: rgb(35, 146, 197);
+    box-shadow: none;
+}   
