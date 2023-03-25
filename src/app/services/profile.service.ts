@@ -41,6 +41,11 @@ export class ProfileService {
     return this.http.post<LoggedUser>(url, loggedUser, { withCredentials: true });   
   }
 
+  logoutProfile(): Observable<Profile> {
+    const url = `${apiUsers}/auth/logout`;
+    return this.http.get<Profile>(url, { withCredentials: true });   
+  }
+
   initalRegistration (firstRegistration: InitialRegister): Observable<InitialRegister> {
     //console.log("registo inicial aqui");
     const url = `${apiUsers}/auth/register`;
