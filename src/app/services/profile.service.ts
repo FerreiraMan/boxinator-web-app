@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Profile } from 'src/app/models/profile.model';
 import { LoggedUser } from '../models/loggedUser';
 import { InitialRegister } from '../models/initialRegis';
-import { GetterProfile } from '../models/GetterProfile';
 
 const { apiUsers } = environment;
 
@@ -27,11 +26,9 @@ export class ProfileService {
 
   getProfile(): Observable<Profile> {
     const url = `${apiUsers}/auth/current-user`;
-    const profile = this.http.get<Profile>(url);
-    return profile;
+    return this.http.get<Profile>(url, { withCredentials: true });
   }
   
-
   saveProfile(id: string, profile: Profile): Observable<Profile> {
     const url = `${apiUsers}/${id}`;
     return this.http.post<Profile>(url, profile);
@@ -41,7 +38,7 @@ export class ProfileService {
     const url = `${apiUsers}/auth/login`;
     //console.log("update novo: user logged in");
     //console.log(loggedUser.email);
-    return this.http.post<LoggedUser>(url, loggedUser);
+    return this.http.post<LoggedUser>(url, loggedUser, { withCredentials: true });   
   }
 
   initalRegistration (firstRegistration: InitialRegister): Observable<InitialRegister> {
@@ -52,6 +49,6 @@ export class ProfileService {
 
   updateProfile(profile: Profile): Observable<Profile> {
     const url = `${apiUsers}/user/shipments/account/update`;
-    return this.http.put<Profile>(url, profile, httpOptions);
+    return this.http.put<Profile>(url, profile, { withCredentials: true });
   }
 }

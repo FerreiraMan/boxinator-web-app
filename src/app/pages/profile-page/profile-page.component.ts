@@ -81,6 +81,8 @@ export class ProfilePageComponent implements OnInit {
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               console.log("getterprofile: " + getter.contactNumber);
+              this.profile.countryOfResidence = getter.countryOfResidence;
+              this.profile.postalCode = getter.postalCode;
               this.profile.contactNumber = getter.contactNumber;
             }, (error) => {
               console.log("getProfile() error:", error);
@@ -94,8 +96,9 @@ export class ProfilePageComponent implements OnInit {
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               console.log("getterprofile: " + getter.contactNumber);
-              this.profile.contactNumber = getter.contactNumber;
-            }, (error) => {
+              this.profile.countryOfResidence = getter.countryOfResidence;
+              this.profile.postalCode = getter.postalCode;
+              this.profile.contactNumber = getter.contactNumber;            }, (error) => {
               console.log("getProfile() error:", error);
             });
 
@@ -117,8 +120,9 @@ export class ProfilePageComponent implements OnInit {
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               console.log("getterprofile: " + getter.contactNumber);
-              this.profile.contactNumber = getter.contactNumber;
-            }, (error) => {
+              this.profile.countryOfResidence = getter.countryOfResidence;
+              this.profile.postalCode = getter.postalCode;
+              this.profile.contactNumber = getter.contactNumber;            }, (error) => {
               console.log("getProfile() error:", error);
             });
 
@@ -130,8 +134,9 @@ export class ProfilePageComponent implements OnInit {
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               console.log("getterprofile: " + getter.contactNumber);
-              this.profile.contactNumber = getter.contactNumber;
-            }, (error) => {
+              this.profile.countryOfResidence = getter.countryOfResidence;
+              this.profile.postalCode = getter.postalCode;
+              this.profile.contactNumber = getter.contactNumber;            }, (error) => {
               console.log("getProfile() error:", error);
             });
 
