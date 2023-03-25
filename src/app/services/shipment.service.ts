@@ -26,7 +26,7 @@ export class ShipmentService {
 
   createShipment(shipment: Shipment): Observable<Shipment> {
     const url = `${apiUsers}/user/shipments`;
-    return this.http.post<Shipment>(url, shipment, httpOptions);
+    return this.http.post<Shipment>(url, shipment, { withCredentials: true });
   }
 
   updateShipment(id: number, shipment: Shipment): Observable<Shipment> {
