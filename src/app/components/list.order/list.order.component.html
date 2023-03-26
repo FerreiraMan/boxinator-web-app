@@ -1,5 +1,6 @@
 <tbody>
   <tr *ngFor="let shipment of shipments">
+    <td class="border px-4 py-2">{{ shipment.createdDate | date:'yyyy-MM-dd HH:mm' }}</td>
     <td class="border px-4 py-2">{{ shipment.receiver }}</td>
     <td class="border px-4 py-2">{{ shipment.weight }}</td>
     <td class="border px-4 py-2"><div class="w-8 h-8 rounded-full" [style.background-color]="shipment.boxColor"></div></td>

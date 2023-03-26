@@ -3,6 +3,7 @@ import { ShipmentService } from 'src/app/services/shipment.service';
 import { Shipment } from 'src/app/models/Shipment';
 import { Tiers } from 'src/app/enums/tiers.enum';
 import { Countries } from 'src/app/enums/Countries.enum';
+import { GetterShipment } from 'src/app/models/GetterShipment';
 
 @Component({
   selector: 'app-order-modal',
@@ -15,7 +16,7 @@ export class OrderModalComponent {
 
   selectedTier: Tiers = Tiers.BASIC;
 
-  shipments: Shipment[] = [];
+  shipments: GetterShipment[] = [];
 
   selectedCountry: Countries = Countries.Portugal;
 
