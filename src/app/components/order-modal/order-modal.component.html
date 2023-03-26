@@ -20,12 +20,15 @@
 
     <mat-form-field>
       <mat-label>Destination Country</mat-label>
-      <input matInput type="text" name="destination" ngModel required>
+      <mat-select [(ngModel)]="selectedCountry" name="country" #countrySelect="ngModel" [required]="true" panelClass="my-dropdown">
+        <mat-option *ngFor="let country of countries" [value]="country">{{country}}</mat-option>
+      </mat-select>      
     </mat-form-field>
+
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" (click)="addShipment(shipmentForm.value.receiver, shipmentForm.value.weight, shipmentForm.value.boxColor, shipmentForm.value.destination)">Add Shipment</button>
+  <button mat-raised-button color="primary" (click)="addShipment(shipmentForm.value.receiver, shipmentForm.value.weight, shipmentForm.value.boxColor, shipmentForm.value.destination)" mat-dialog-close>Add Shipment</button>
   <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>
