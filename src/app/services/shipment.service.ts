@@ -39,9 +39,9 @@ export class ShipmentService {
     return this.http.get<Shipment>(url, httpOptions);
   }
   
-  getAllShipments(): Observable<Shipment> {
+  getAllShipments(): Observable<Shipment[]> {
     const url = `${apiUsers}/user/shipments`;
-    return this.http.get<Shipment>(url, httpOptions);
+    return this.http.get<Shipment[]>(url, { withCredentials: true });
   }
 
   getAllCompletedShipments(): Observable<Shipment> {
