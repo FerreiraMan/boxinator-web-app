@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { Shipment } from '../models/Shipment';
+import { GetterShipment } from '../models/GetterShipment';
 
 const { apiUsers } = environment;
 
@@ -39,9 +40,9 @@ export class ShipmentService {
     return this.http.get<Shipment>(url, httpOptions);
   }
   
-  getAllShipments(): Observable<Shipment[]> {
+  getAllShipments(): Observable<GetterShipment[]> {
     const url = `${apiUsers}/user/shipments`;
-    return this.http.get<Shipment[]>(url, { withCredentials: true });
+    return this.http.get<GetterShipment[]>(url, { withCredentials: true });
   }
 
   getAllCompletedShipments(): Observable<Shipment> {

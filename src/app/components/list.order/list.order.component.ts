@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetterShipment } from 'src/app/models/GetterShipment';
 import { Shipment } from 'src/app/models/Shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { OrderModalComponent } from '../order-modal/order-modal.component';
@@ -10,7 +11,7 @@ import { OrderModalComponent } from '../order-modal/order-modal.component';
 })
 export class ListOrderComponent implements OnInit {
 
-  shipments: Shipment[] = [];
+  shipments: GetterShipment[] = [];
 
   constructor(
     private shipmentService: ShipmentService,
@@ -21,12 +22,12 @@ export class ListOrderComponent implements OnInit {
         this.shipments = shipments;
       });
     
-      this.orderModal.shipmentCreated.subscribe((shipment: Shipment) => {
+      this.orderModal.shipmentCreated.subscribe((shipment: GetterShipment) => {
         this.shipments.push(shipment); // add the new shipment to the array
       });      
     }
     
-  calculateCost(shipment: Shipment) {
+  calculateCost(shipment: GetterShipment) {
     // logic to calculate the cost based on the weight and destination of the shipment
   }
 }
