@@ -6,4 +6,5 @@ export interface Shipment {
     boxColor: string;
     receiver: string;
     destination: string;
+    cost: number;
   }

@@ -5,4 +5,5 @@ export interface GetterShipment {
     boxColor: string;
     receiver: string;
     destination: string;
+    cost: number;
   }
