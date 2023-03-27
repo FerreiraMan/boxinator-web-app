@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login-page/login-page.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
@@ -48,7 +47,7 @@ import { OrderModalComponent } from './components/order-modal/order-modal.compon
     BrowserAnimationsModule,
     MatSelectModule,
     MatOptionModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
     OrderModalComponent

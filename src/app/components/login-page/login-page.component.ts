@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin() {
-    keycloak.redirectUri = window.location.origin + "/profile";      
+    keycloak.redirectUri = window.location.origin + "/profile";  
     keycloak.login().then(() => {
     });
     console.log("idToken2: " +  this.oauthService.getIdToken());
@@ -50,6 +50,10 @@ export class LoginComponent implements OnInit {
       return true;
     }
     return null
+  }
+
+  handleLoginGuest () {
+
   }
 
 }

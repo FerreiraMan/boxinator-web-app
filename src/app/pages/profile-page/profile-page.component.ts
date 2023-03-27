@@ -8,7 +8,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoggedUser } from 'src/app/models/loggedUser';
 import { InitialRegister } from 'src/app/models/initialRegis';
 import { GetterProfile } from 'src/app/models/GetterProfile';
-
+import Swal from 'sweetalert2';
+import { Countries } from 'src/app/enums/Countries.enum';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,6 +17,8 @@ import { GetterProfile } from 'src/app/models/GetterProfile';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
+
+  public countries = Object.values(Countries);
 
   profile: Profile = {
     //id: '',
@@ -41,7 +44,7 @@ export class ProfilePageComponent implements OnInit {
     lastName: 'default',
     email: '',
     password: '123123123',
-    dateOfBirth: '2023-03-23',
+    dateOfBirth: 'YYYY-MM-DD',
     countryOfResidence: 'default',
     postalCode: 'default',
     contactNumber: 'default',
@@ -154,6 +157,10 @@ export class ProfilePageComponent implements OnInit {
       }
     );
   }
+
+sucessNotification () {
+  Swal.fire('Success!', 'Your profile was updated!', 'success');
+}
 
 onSubmit() {
   const userId = StorageUtil.sessionStorageRead('userId');

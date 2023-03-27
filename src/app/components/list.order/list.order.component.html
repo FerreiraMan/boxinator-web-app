@@ -1,11 +1,32 @@
-<tbody>
-  <tr *ngFor="let shipment of shipments">
-    <td class="border px-4 py-2">{{ shipment.createdDate | date:'yyyy-MM-dd HH:mm' }}</td>
-    <td class="border px-4 py-2">{{ shipment.receiver }}</td>
-    <td class="border px-4 py-2">{{ shipment.weight }}</td>
-    <td class="border px-4 py-2"><div class="w-3 h-8 squared-full" [style.background-color]="shipment.boxColor"></div></td>
-    <td class="border px-4 py-2">{{ shipment.destination }}</td>
-    <td class="border px-4 py-2">{{ calculateCost(shipment.weight, shipment.destination) }}</td>
-    <td class="border px-4 py-2">{{ shipment.status }}</td>
-  </tr>
-</tbody>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-list">
+        <!-- <caption>Titulo da tabela</caption> -->
+        <thead>
+          <tr>
+            <th>Creation Date</th>
+            <th>Receiver</th>
+            <th>Weight Tier</th>
+            <th>Color</th>
+            <th>Destination</th>
+            <th>Cost €</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shipment of shipments">
+            <td>{{ shipment.createdDate | date:'yyyy-MM-dd HH:mm' }}</td>
+            <td>{{ shipment.receiver }}</td>
+            <td>{{ shipment.weight }}</td>
+            <td><div class="w-8 h-8 squared-full" [style.background-color]="shipment.boxColor"></div></td>
+            <td>{{ shipment.destination }}</td>
+            <td>{{ shipment.cost }}</td>
+            <td>{{ shipment.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
