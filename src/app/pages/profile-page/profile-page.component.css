@@ -1,4 +1,29 @@
+.profileForm{
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+.profileForm input{
+    background-color: #e4dddd;
+}
 .profileForm input:focus{
     border-color: rgb(35, 146, 197);
     box-shadow: none;
 }   
+
+.profileForm p span{
+    display: block;
+    background-color: #ccc9c9;
+    border: 1px solid #ccc9c9;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+    margin-top: 0.25rem;
+    cursor: not-allowed;
+}
+
+.form-group__country{
+    height: 60px;
+    width: 100%;
+}
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix{
+    padding-top: 8px;
+}

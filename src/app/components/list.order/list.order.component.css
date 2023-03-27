@@ -1,0 +1,19 @@
+.table-list,
+.table-list th,
+.table-list td{
+    border: 1px solid rgb(208, 201, 201);
+}
+
+.table-list thead,
+.table-list tbody{
+    border-width: 1px;
+}
+
+.table-list th{
+    color: lightgray;
+}
+
+.table-list th,
+.table-list td{
+    padding: 12px;
+}
