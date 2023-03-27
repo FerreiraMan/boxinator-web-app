@@ -44,7 +44,11 @@
               <label for="postalCode" class="mb-1">Postal Code</label>
               <input type="text" class="form-control" id="postalCode" name="postalCode" required [(ngModel)]="profile.postalCode"
               required pattern="^\d{7}$"
-              title="Postal code must have 7 digits">
+              title="Postal code must have 7 digits"
+              #postalCodeInput="ngModel">
+              <div *ngIf="postalCodeInput.invalid && (postalCodeInput.dirty || postalCodeInput.touched)" class="text-danger mt-1">
+                Postal code must have 7 digits.
+              </div>
             </div>
           </div>
           <div class="col-12 col-md-6">
@@ -52,12 +56,16 @@
               <label for="contactNumber" class="mb-1">Contact Number</label>
               <input type="text" class="form-control" id="contactNumber" name="contactNumber" required [(ngModel)]="profile.contactNumber"
               required pattern="^\d{9}$"
-              title="Contact number must have 9 digits">
+              title="Contact number must have 9 digits"
+              #contactoNumberInput="ngModel">
+              <div *ngIf="contactoNumberInput.invalid && (contactoNumberInput.dirty || contactoNumberInput.touched)" class="text-danger mt-1">
+                Contact number must have 9 digits.
+              </div>
             </div>
           </div>
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid" (click) = "sucessNotification()">Update Profile</button>
+          <button type="submit" mat-raised-button color="primary" [disabled]="!profileForm.valid" (click) = "sucessNotification()">Update Profile</button>
         </div>
         
       </form>

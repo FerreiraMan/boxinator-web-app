@@ -1,32 +1,32 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <table class="table table-list">
-        <!-- <caption>Titulo da tabela</caption> -->
-        <thead>
+      <table class="table table-hover">
+        <thead class="thead-dark">
           <tr>
-            <th>Creation Date</th>
-            <th>Receiver</th>
-            <th>Weight Tier</th>
-            <th>Color</th>
-            <th>Destination</th>
-            <th>Cost €</th>
-            <th>Status</th>
+            <th class="text-center">Creation Date</th>
+            <th class="text-center">Receiver</th>
+            <th class="text-center">Weight Tier</th>
+            <th class="text-center">Color</th>
+            <th class="text-center">Destination</th>
+            <th class="text-center">Cost €</th>
+            <th class="text-center">Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let shipment of shipments">
-            <td>{{ shipment.createdDate | date:'yyyy-MM-dd HH:mm' }}</td>
-            <td>{{ shipment.receiver }}</td>
-            <td>{{ shipment.weight }}</td>
-            <td><div class="w-8 h-8 squared-full" [style.background-color]="shipment.boxColor"></div></td>
-            <td>{{ shipment.destination }}</td>
-            <td>{{ shipment.cost }}</td>
-            <td>{{ shipment.status }}</td>
+            <td class="text-center">{{ shipment.createdDate | date:'yyyy-MM-dd HH:mm' }}</td>
+            <td class="text-center">{{ shipment.receiver }}</td>
+            <td class="text-center">{{ shipment.weight }}</td>
+            <td class="text-center"><div class="rounded-circle" [style.background-color]="shipment.boxColor" style="width: 24px; height: 24px;"></div></td>
+            <td class="text-center">{{ shipment.destination }}</td>
+            <td class="text-center">{{ shipment.cost }}</td>
+            <td class="text-center">{{ shipment.status }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
 

@@ -6,6 +6,7 @@ import { Countries } from 'src/app/enums/Countries.enum';
 import { GetterShipment } from 'src/app/models/GetterShipment';
 import { map, Observable, of } from 'rxjs';
 import { COUNTRY_MULTIPLIERS } from 'src/app/models/Countries';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-modal',
@@ -28,7 +29,10 @@ export class OrderModalComponent {
 
   countries: string[] = Object.values(Countries);
 
-  constructor(private shipmentService: ShipmentService) {}
+  constructor(
+    private shipmentService: ShipmentService,
+    private router: Router,
+    ) {}
 
   addShipment(receiver: string, weight: string, boxColor: string, destination: Countries) {
     const shipment: Shipment = {
