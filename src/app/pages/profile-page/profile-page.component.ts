@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -21,7 +21,6 @@ export class ProfilePageComponent implements OnInit {
   public countries = Object.values(Countries);
 
   profile: Profile = {
-    //id: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -30,8 +29,6 @@ export class ProfilePageComponent implements OnInit {
     countryOfResidence: '',
     postalCode: '',
     contactNumber: '',
-    //accountType: ProfileType.REGISTERED_USER,
-    //shipments: null
   };
 
   loggedUser: LoggedUser = {
@@ -44,10 +41,10 @@ export class ProfilePageComponent implements OnInit {
     lastName: 'default',
     email: '',
     password: '123123123',
-    dateOfBirth: 'YYYY-MM-DD',
-    countryOfResidence: 'default',
-    postalCode: 'default',
-    contactNumber: 'default',
+    dateOfBirth: '2023-12-31',
+    countryOfResidence: Countries.Portugal,
+    postalCode: 'Default',
+    contactNumber: 'Default',
   }
 
   getterProfile: GetterProfile = {
@@ -82,7 +79,6 @@ export class ProfilePageComponent implements OnInit {
             //console.log("success in logging in");
             //console.log("fetchedProfile: ");
             
-
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               //console.log("getterprofile: " + getter.contactNumber);
               this.profile.countryOfResidence = getter.countryOfResidence;

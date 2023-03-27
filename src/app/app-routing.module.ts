@@ -4,13 +4,14 @@ import { AuthGuard } from "./auth.guard";
 import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login-page/login-page.component";
 import { ProfilePageComponent } from "./pages/profile-page/profile-page.component";
+import { ProfileCompletionGuard } from "./utils/profile-completion.guard";
 
 
 const routes: Routes = [
     { 
         path: "home", 
         component: HomeComponent, 
-        canActivate: [AuthGuard] 
+        canActivate: [AuthGuard , ProfileCompletionGuard]
     },
     { 
         path: "login", 
@@ -19,7 +20,7 @@ const routes: Routes = [
     { 
         path: "profile", 
         component: ProfilePageComponent, 
-        canActivate: [AuthGuard] 
+        canActivate: [AuthGuard]
     },
     { 
         path: "", 

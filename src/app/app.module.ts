@@ -50,7 +50,8 @@ import { OrderModalComponent } from './components/order-modal/order-modal.compon
     MatButtonModule,
   ],
   providers: [
-    OrderModalComponent
+    OrderModalComponent,
+    ProfilePageComponent
   ],
   bootstrap: [AppComponent]
 })
