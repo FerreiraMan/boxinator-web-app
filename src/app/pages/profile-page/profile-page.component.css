@@ -1,6 +1,9 @@
 .profileForm{
-    margin-top: 80px;
     margin-bottom: 80px;
+    padding: 24px;
+    box-shadow: 4px 4px 10px #a5a0a0;
+    border: 1px solid #a5a0a0;
+    border-radius: 12px;
 }
 .profileForm input{
     background-color: #e4dddd;
@@ -23,7 +26,5 @@
 .form-group__country{
     height: 60px;
     width: 100%;
-}
-.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix{
-    padding-top: 8px;
+    margin-bottom: -1.25em;
 }
