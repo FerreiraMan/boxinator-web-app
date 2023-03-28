@@ -1,7 +1,8 @@
 import { Tiers } from "../enums/tiers.enum";
+import { ShipmentStatus } from "../enums/ShipmentStatus.enum";
 
 export interface Shipment {
-    status: "CREATED";
+    status: ShipmentStatus;
     weight: Tiers;
     boxColor: string;
     receiver: string;

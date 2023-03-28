@@ -1,4 +1,5 @@
 export interface GetterShipment {
+    id: number;
     status: string;
     createdDate: string
     weight: string;

@@ -43,8 +43,8 @@ export class ProfilePageComponent implements OnInit {
     password: '123123123',
     dateOfBirth: '2023-12-31',
     countryOfResidence: Countries.Portugal,
-    postalCode: 'Default',
-    contactNumber: 'Default',
+    postalCode: '',
+    contactNumber: '',
   }
 
   getterProfile: GetterProfile = {

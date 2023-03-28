@@ -22,11 +22,11 @@ export class ProfileCompletionGuard implements CanActivate {
       const contactNumber = (<HTMLInputElement>document.getElementById('contactNumber')).value;
       let message = 'Please update the following field(s): ';
     
-      if (postalCode === 'Default' && contactNumber === 'Default') {
+      if (postalCode === '' && contactNumber === '') {
         message += 'Postal Code and Contact Number';
-      } else if (postalCode === 'Default') {
+      } else if (postalCode === '') {
         message += 'Postal Code';
-      } else if (contactNumber === 'Default') {
+      } else if (contactNumber === '') {
         message += 'Contact Number';
       } else {
         return true;

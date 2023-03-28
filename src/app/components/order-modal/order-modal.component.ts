@@ -7,6 +7,7 @@ import { GetterShipment } from 'src/app/models/GetterShipment';
 import { Observable, of } from 'rxjs';
 import { COUNTRY_MULTIPLIERS } from 'src/app/models/Countries';
 import { ProfileService } from 'src/app/services/profile.service';
+import { ShipmentStatus } from 'src/app/enums/ShipmentStatus.enum';
 
 @Component({
   selector: 'app-order-modal',
@@ -43,7 +44,7 @@ export class OrderModalComponent implements OnInit {
 
   addShipment(receiver: string, weight: string, boxColor: string, destination: Countries) {
     const shipment: Shipment = {
-      status: 'CREATED',
+      status: ShipmentStatus.CREATED,
       weight: this.getWeightForTier(this.selectedTier),
       boxColor: boxColor,
       receiver: receiver,
