@@ -1,6 +1,7 @@
-
-    <router-outlet>
-        <app-navbar></app-navbar>
-        <div class="container">
-        </div>
-    </router-outlet>
+<div *ngIf="canAppear(); else notLoggedIn">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+  </div>
+  <ng-template #notLoggedIn>
+    <router-outlet></router-outlet>
+  </ng-template>

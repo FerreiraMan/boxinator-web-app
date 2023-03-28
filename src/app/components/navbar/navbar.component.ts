@@ -4,7 +4,8 @@ import { authCodeFlowConfig } from 'src/app/sso-config';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import keycloak from 'src/keycloak';
 import { ProfileService } from 'src/app/services/profile.service';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
 
   constructor (
     private oauthService: OAuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {

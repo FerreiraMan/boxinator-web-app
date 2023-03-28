@@ -127,7 +127,7 @@ export interface CountryMultipliers {
             Nauru: 2,
             Nepal: 3,
             Netherlands: 4,
-            NewZealand: 5,
+            NewZealand: 4,
             Nicaragua: 6,
             Niger: 7,
             Nigeria: 8,

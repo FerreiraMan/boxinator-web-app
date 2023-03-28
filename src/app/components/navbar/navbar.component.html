@@ -2,13 +2,26 @@
   <div class="container mx-auto flex items-center justify-between py-3">
 
     <!-- Brand -->
-    <a class="navbar-brand" routerLink="/login">Boxinator</a>
+    <!-- <a class="navbar-brand" routerLink="/login">Boxinator</a> -->
+    <div class="d-flex items-center text-black divLogo">
+      <img src="../../../assets/imgs/cargo-ship.png" alt="cargo-ship">
+      Boxinator
+    </div>
 
     <!-- Navigation Links -->
     <div class="flex space-x-4">
-      <a *ngIf="handleToken()" class="nav-link active" aria-current="page" routerLink="/home">Home</a>
-      <a *ngIf="handleToken()" class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
-      <a *ngIf="handleToken()" class="nav-link" (click)="handleLogout()">Logout</a>
+      <a *ngIf="handleToken()" class="d-flex px-3 py-2 rounded-md text-sm font-medium text-black no-underline hover:text-white hover:bg-gray-300 focus:outline-none focus:text-white focus:bg-gray-200" aria-current="page" routerLink="/home">
+        <img class="imgNavbar" src="../../../assets/imgs/approval.png" alt="approval">
+        Shipments
+      </a>
+      <a *ngIf="handleToken()" class="d-flex px-3 py-2 rounded-md text-sm font-medium text-black no-underline hover:text-white hover:bg-gray-300 focus:outline-none focus:text-white focus:bg-gray-200" aria-current="page" routerLink="/profile">
+        <img class="imgNavbar" src="../../../assets/imgs/user.png" alt="user">
+        Profile
+      </a>
+      <a *ngIf="handleToken()" class="px-3 py-2 rounded-md text-sm font-medium cursor-pointer text-black hover:text-white hover:bg-gray-300 focus:outline-none focus:text-white focus:bg-gray-200" (click)="handleLogout()">
+        <img class="imgNavbar m-0" src="../../../assets/imgs/logout.png" alt="logout">
+        <!-- Logout -->
+      </a>
     </div>
 
   </div>

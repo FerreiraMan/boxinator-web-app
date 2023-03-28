@@ -90,8 +90,8 @@ export class OrderModalComponent implements OnInit {
 
   calculateCost(weight: string, destination: Countries): Observable<number> {
     const countryMultiplier = COUNTRY_MULTIPLIERS[destination];
-    let weightInKg = 0;
-
+    let weightInKg = 0; 
+    
     if (weight === "BASIC") {
       weightInKg = 1;
     } else if (weight === "HUMBLE") {

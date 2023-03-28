@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import keycloak from 'src/keycloak';
 import { authCodeFlowConfig } from 'src/app/sso-config';
@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor (
     private oauthService: OAuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {

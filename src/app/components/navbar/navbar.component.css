@@ -1,0 +1,17 @@
+.navbar{
+    background-color: #FFF;
+    box-shadow: 0 5px 5px #e3e0e0;
+}
+.divLogo{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+}
+.divLogo img{
+    width: 32px;
+    margin-right: 12px;
+}
+.imgNavbar{
+    width: 20px;
+    margin-right: 8px;
+}
