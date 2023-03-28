@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Profile } from 'src/app/models/profile.model';
 import { LoggedUser } from '../models/loggedUser';
 import { InitialRegister } from '../models/initialRegis';
@@ -55,5 +55,12 @@ export class ProfileService {
   updateProfile(profile: Profile): Observable<Profile> {
     const url = `${apiUsers}/user/shipments/account/update`;
     return this.http.put<Profile>(url, profile, { withCredentials: true });
+  }
+
+  getCountryOnly(): Observable<string> {
+    const url = `${apiUsers}/auth/current-user`;
+    return this.http.get<Profile>(url, { withCredentials: true }).pipe(
+      map(profile => profile.countryOfResidence || '') // add default value for null case
+    );
   }
 }
