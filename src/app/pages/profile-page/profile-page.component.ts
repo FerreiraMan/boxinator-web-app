@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile.service';
 import { StorageUtil } from 'src/app/utils/storage.util';
 import keycloak from 'src/keycloak';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LoggedUser } from 'src/app/models/loggedUser';
 import { InitialRegister } from 'src/app/models/initialRegis';
 import { GetterProfile } from 'src/app/models/GetterProfile';
@@ -88,9 +88,6 @@ export class ProfilePageComponent implements OnInit {
             }, (error) => {
               console.log("getProfile() error:", error);
             });
-
-
-
           },
           (error) => {
             //console.log("error in logging in user", error);
@@ -104,9 +101,6 @@ export class ProfilePageComponent implements OnInit {
             }, (error) => {
               console.log("getProfile() error:", error);
             });
-
-
-
           }
         );
       },
@@ -130,9 +124,6 @@ export class ProfilePageComponent implements OnInit {
             }, (error) => {
               console.log("getProfile() error:", error);
             });
-
-
-
           },
           (error) => {
             //console.log("error in logging in user", error);
@@ -146,8 +137,6 @@ export class ProfilePageComponent implements OnInit {
             }, (error) => {
               console.log("getProfile() error:", error);
             });
-
-
           }
         );
       }
@@ -159,33 +148,33 @@ sucessNotification () {
 }
 
 onSubmit() {
-  const userId = StorageUtil.sessionStorageRead('userId');
-if (typeof userId === 'string' && userId.length > 0) {
-  // update existing profile
-  this.profileService.saveProfile(userId, this.profile).subscribe(
-    (savedProfile) => {
-      // Handle success case
-      //console.log("sucess in updating user");
-    },
-    (error) => {
-      // Handle error case
-      //console.log("error in updated user");
+      const userId = StorageUtil.sessionStorageRead('userId');
+      if (typeof userId === 'string' && userId.length > 0) {
+      // update existing profile
+      this.profileService.saveProfile(userId, this.profile).subscribe(
+        (savedProfile) => {
+          // Handle success case
+          //console.log("sucess in updating user");
+        },
+        (error) => {
+          // Handle error case
+          //console.log("error in updated user");
+        }
+      );
+      } else {
+      // create new profile
+      this.profileService.updateProfile(this.profile).subscribe(
+        (updatedProfile) => {
+          StorageUtil.sessionStorageSave('mail', updatedProfile.email); // store user's mail in local storage
+          // Handle success case
+          //console.log("sucess in updating user");
+        },
+        (error) => {
+          // Handle error case
+          //console.log(this.profile);
+          //console.log("error in updating user", error);
+        }
+      );
     }
-  );
-} else {
-  // create new profile
-  this.profileService.updateProfile(this.profile).subscribe(
-    (updatedProfile) => {
-      StorageUtil.sessionStorageSave('mail', updatedProfile.email); // store user's mail in local storage
-      // Handle success case
-      //console.log("sucess in updating user");
-    },
-    (error) => {
-      // Handle error case
-      //console.log(this.profile);
-      //console.log("error in updating user", error);
-    }
-  );
-}
-}
+  }
 }

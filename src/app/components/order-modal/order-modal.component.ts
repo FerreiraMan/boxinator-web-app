@@ -1,19 +1,21 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { Shipment } from 'src/app/models/Shipment';
 import { Tiers } from 'src/app/enums/tiers.enum';
 import { Countries } from 'src/app/enums/Countries.enum';
 import { GetterShipment } from 'src/app/models/GetterShipment';
-import { map, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { COUNTRY_MULTIPLIERS } from 'src/app/models/Countries';
-import { Router } from '@angular/router';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-order-modal',
   templateUrl: './order-modal.component.html',
   styleUrls: ['./order-modal.component.css']
 })
-export class OrderModalComponent {
+export class OrderModalComponent implements OnInit {
+
+  sourceCountry: string = '';
 
   @Output() shipmentCreated = new EventEmitter<Shipment>();
 
@@ -31,8 +33,13 @@ export class OrderModalComponent {
 
   constructor(
     private shipmentService: ShipmentService,
-    private router: Router,
-    ) {}
+    private profileService: ProfileService) {}
+
+  ngOnInit(): void {
+    this.profileService.getCountryOnly().subscribe(sourceCountry => {
+      this.sourceCountry = sourceCountry;
+    });
+  }
 
   addShipment(receiver: string, weight: string, boxColor: string, destination: Countries) {
     const shipment: Shipment = {
@@ -45,7 +52,18 @@ export class OrderModalComponent {
     };
 
     this.calculateCost(this.getWeightForTier(this.selectedTier), this.getCountries(this.selectedCountry)).subscribe(cost => {
-        shipment.cost = cost; // Assign the result of calculateCost to the shipment cost
+
+        console.log("sourceCountry: " + this.sourceCountry);
+        
+        if ((this.sourceCountry === "Sweden" || this.sourceCountry === "Norway" || this.sourceCountry === "Denmark")  && 
+          ((this.getCountries(this.selectedCountry) === "Sweden") || 
+          (this.getCountries(this.selectedCountry) === "Norway") || 
+          (this.getCountries(this.selectedCountry) === "Denmark"))) {
+            shipment.cost = 200
+        } else {
+          shipment.cost = cost; // Assign the result of calculateCost to the shipment cost
+        }
+
         this.shipmentService.createShipment(shipment).subscribe(() => {
           // handle successful creation of shipment
           console.log("shipment created" + shipment);
@@ -72,6 +90,7 @@ export class OrderModalComponent {
   calculateCost(weight: string, destination: Countries): Observable<number> {
     const countryMultiplier = COUNTRY_MULTIPLIERS[destination];
     let weightInKg = 0;
+
     if (weight === "BASIC") {
       weightInKg = 1;
     } else if (weight === "HUMBLE") {
@@ -81,6 +100,7 @@ export class OrderModalComponent {
     } else if (weight === "PREMIUM") {
       weightInKg = 8;
     }
+
     const cost = countryMultiplier ? (200 + weightInKg * countryMultiplier) : 0;
     return of(cost);
   }
