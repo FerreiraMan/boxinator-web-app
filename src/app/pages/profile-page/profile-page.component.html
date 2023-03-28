@@ -45,7 +45,9 @@
               <input type="text" class="form-control" id="postalCode" name="postalCode" required [(ngModel)]="profile.postalCode"
               required pattern="^\d{7}$"
               title="Postal code must have 7 digits"
-              #postalCodeInput="ngModel">
+              #postalCodeInput="ngModel"
+              placeholder="Enter Postal Code"
+              >
               <div *ngIf="postalCodeInput.invalid && (postalCodeInput.dirty || postalCodeInput.touched)" class="text-danger mt-1">
                 Postal code must have 7 digits.
               </div>
@@ -57,7 +59,9 @@
               <input type="text" class="form-control" id="contactNumber" name="contactNumber" required [(ngModel)]="profile.contactNumber"
               required pattern="^\d{9}$"
               title="Contact number must have 9 digits"
-              #contactoNumberInput="ngModel">
+              #contactoNumberInput="ngModel"
+              placeholder="Enter Contact Number"
+              >
               <div *ngIf="contactoNumberInput.invalid && (contactoNumberInput.dirty || contactoNumberInput.touched)" class="text-danger mt-1">
                 Contact number must have 9 digits.
               </div>

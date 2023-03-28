@@ -1,0 +1,7 @@
+export enum ShipmentStatus {
+    CREATED = "CREATED",
+    RECIEVED = "RECIEVED",
+    INTRANSIT = "INTRANSIT",
+    COMPLETED = "COMPLETED",
+    CANCELLED = "CANCELLED"
+  }

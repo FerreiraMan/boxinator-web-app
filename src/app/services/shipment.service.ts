@@ -30,9 +30,9 @@ export class ShipmentService {
     return this.http.post<Shipment>(url, shipment, { withCredentials: true });
   }
 
-  updateShipment(id: number, shipment: Shipment): Observable<Shipment> {
+  updateShipment(id: number, shipment: GetterShipment): Observable<GetterShipment> {
     const url = `${apiUsers}/user/shipments/${id}`;
-    return this.http.put<Shipment>(url, shipment, httpOptions);
+    return this.http.put<GetterShipment>(url, shipment, { withCredentials: true });
   }
 
   getShipmentById(id: number): Observable<Shipment> {
@@ -54,5 +54,4 @@ export class ShipmentService {
     const url = `${apiUsers}/user/shipments/cancelled`;
     return this.http.get<Shipment>(url, httpOptions);
   }
-
 }
