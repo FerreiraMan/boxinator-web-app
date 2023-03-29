@@ -42,6 +42,9 @@ export class OrderModalComponent implements OnInit {
     });
   }
 
+  destinationCost: string = "";
+
+
   addShipment(receiver: string, weight: string, boxColor: string, destination: Countries) {
     const shipment: Shipment = {
       status: ShipmentStatus.CREATED,
@@ -52,9 +55,9 @@ export class OrderModalComponent implements OnInit {
       cost: 0 // Set initial cost to zero
     };
 
-    this.calculateCost(this.getWeightForTier(this.selectedTier), this.getCountries(this.selectedCountry)).subscribe(cost => {
+    this.destinationCost = (this.getCountries(this.selectedCountry)).toString().replace(/\s+/g, '');
 
-        console.log("sourceCountry: " + this.sourceCountry);
+    this.calculateCost(this.getWeightForTier(this.selectedTier), this.destinationCost).subscribe(cost => {
         
         if ((this.sourceCountry === "Sweden" || this.sourceCountry === "Norway" || this.sourceCountry === "Denmark")  && 
           ((this.getCountries(this.selectedCountry) === "Sweden") || 
@@ -88,7 +91,7 @@ export class OrderModalComponent implements OnInit {
     return country;
   }
 
-  calculateCost(weight: string, destination: Countries): Observable<number> {
+  calculateCost(weight: string, destination: string): Observable<number> {
     const countryMultiplier = COUNTRY_MULTIPLIERS[destination];
     let weightInKg = 0; 
     
