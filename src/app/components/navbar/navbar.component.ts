@@ -6,6 +6,7 @@ import keycloak from 'src/keycloak';
 import { ProfileService } from 'src/app/services/profile.service';
 import { map, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { StorageUtil } from 'src/app/utils/storage.util';
 
 @Component({
   selector: 'app-navbar',
@@ -38,10 +39,12 @@ export class NavbarComponent implements OnInit {
     this.profileService.logoutProfile().pipe(
       tap((response) => {
         //console.log('Session-based logout successful:', response);
+        StorageUtil.sessionStorageRemove;
       }),
     ).subscribe(() => {
       keycloak.logout().then(() => {
         //console.log('Keycloak logout successful');
+        StorageUtil.sessionStorageRemove;
       }).catch((error) => {
         //console.error('Keycloak logout error:', error);
       });

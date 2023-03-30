@@ -24,7 +24,7 @@ export class ListOrderComponent implements OnInit {
     ngOnInit() {
       this.shipmentService.getAllShipments().subscribe(shipments => {
       this.shipments = shipments;
-      this.filteredShipments = shipments;
+      this.filteredShipments = [...shipments];
       });
     
       this.orderModal.shipmentCreated.subscribe((shipment: GetterShipment) => {
@@ -35,7 +35,7 @@ export class ListOrderComponent implements OnInit {
 
     filterShipments(status?: string) {
       if (!status) {
-        this.filteredShipments = this.shipments;
+        this.filteredShipments = [...this.shipments];
       } else if (status === 'created') {
         this.filteredShipments = this.shipments.filter(shipment => shipment.status === ShipmentStatus.CREATED);
       } else if (status === 'cancelled') {
@@ -47,7 +47,7 @@ export class ListOrderComponent implements OnInit {
       if (shipment.status === ShipmentStatus.CREATED) {
         shipment.status = ShipmentStatus.CANCELLED;
         this.shipmentService.updateShipment(id, shipment).subscribe(updatedShipment => {
-          console.log("Shipment cancelled:", updatedShipment);
+          //console.log("Shipment cancelled:", updatedShipment);
           this.filterShipments();
         });
       } else {

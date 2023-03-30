@@ -2,6 +2,11 @@
   <div class="row">
     <div class="col-12">
       <h2 class="mb-8 mt-4">My Shipments</h2>
+      <div class="btn-group mb-4 border-right-0" role="group" aria-label="Filter Shipments">
+        <button type="button" class="btn btn-outline-primary mr-2 rounded-pill" (click)="filterShipments()">All Shipments</button>
+        <button type="button" class="btn btn-outline-success mr-2 rounded-pill" (click)="filterShipments('created')">Created</button>
+        <button type="button" class="btn btn-outline-danger rounded-pill" (click)="filterShipments('cancelled')">Cancelled</button>
+      </div>      
       <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
@@ -36,11 +41,6 @@
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="btn-group" role="group" aria-label="Filter Shipments">
-    <button type="button" class="btn btn-secondary" (click)="filterShipments()">All Shipments</button>
-    <button type="button" class="btn btn-primary" (click)="filterShipments('created')">Created</button>
-    <button type="button" class="btn btn-danger" (click)="filterShipments('cancelled')">Cancelled</button>
   </div>
 </div>
 

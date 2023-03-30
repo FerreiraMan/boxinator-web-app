@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import keycloak from 'src/keycloak';
+import { StorageUtil } from './utils/storage.util';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import keycloak from 'src/keycloak';
 })
 export class AppComponent{
   title = 'boxinatorApp';
-
+  
   canAppear () {
     return keycloak.authenticated;
   }
