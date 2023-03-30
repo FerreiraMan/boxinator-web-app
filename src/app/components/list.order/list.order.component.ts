@@ -14,8 +14,8 @@ import { OrderModalComponent } from '../order-modal/order-modal.component';
 export class ListOrderComponent implements OnInit {
 
   shipments: GetterShipment[] = [];
-
-  ShipmentStatus = ShipmentStatus; // make sure to assign it to a class property
+  filteredShipments: GetterShipment[] = [];
+  ShipmentStatus = ShipmentStatus;
 
   constructor(
     private shipmentService: ShipmentService,
@@ -24,21 +24,34 @@ export class ListOrderComponent implements OnInit {
     ngOnInit() {
       this.shipmentService.getAllShipments().subscribe(shipments => {
       this.shipments = shipments;
+      this.filteredShipments = shipments;
       });
     
       this.orderModal.shipmentCreated.subscribe((shipment: GetterShipment) => {
-        this.shipments.push(shipment); // add the new shipment to the array
+        this.shipments.push(shipment);
+        this.filterShipments();
       });    
     }
+
+    filterShipments(status?: string) {
+      if (!status) {
+        this.filteredShipments = this.shipments;
+      } else if (status === 'created') {
+        this.filteredShipments = this.shipments.filter(shipment => shipment.status === ShipmentStatus.CREATED);
+      } else if (status === 'cancelled') {
+        this.filteredShipments = this.shipments.filter(shipment => shipment.status === ShipmentStatus.CANCELLED);
+      }
+    }    
 
     cancelShipment(id: number, shipment: GetterShipment) {
       if (shipment.status === ShipmentStatus.CREATED) {
         shipment.status = ShipmentStatus.CANCELLED;
         this.shipmentService.updateShipment(id, shipment).subscribe(updatedShipment => {
           console.log("Shipment cancelled:", updatedShipment);
+          this.filterShipments();
         });
       } else {
-      Swal.fire("Unable to cancel shipment! Only possible when in CREATED status.")
+        Swal.fire("Unable to cancel shipment! Only possible when in CREATED status.")
       }
     } 
   }
