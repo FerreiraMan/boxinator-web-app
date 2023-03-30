@@ -90,7 +90,7 @@ export class ProfilePageComponent implements OnInit {
             });
           },
           (error) => {
-            //console.log("error in logging in user", error);
+            console.log("error in logging in user", error);
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               //console.log("getterprofile: " + getter.contactNumber);
@@ -126,7 +126,7 @@ export class ProfilePageComponent implements OnInit {
             });
           },
           (error) => {
-            //console.log("error in logging in user", error);
+            console.log("error in logging in user", error);
 
             this.profileService.getProfile().subscribe((getter: GetterProfile) => {
               //console.log("getterprofile: " + getter.contactNumber);

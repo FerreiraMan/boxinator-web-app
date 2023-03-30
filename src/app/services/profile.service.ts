@@ -11,7 +11,7 @@ const { apiUsers } = environment;
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Origin': 'https://boxinator-web-app-vert.vercel.app',
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   })
