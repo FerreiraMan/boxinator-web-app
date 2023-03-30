@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import keycloak from 'src/keycloak';
 import { authCodeFlowConfig } from 'src/app/sso-config';
+import { StorageUtil } from 'src/app/utils/storage.util';
 
 @Component({
   selector: 'app-login.page',
@@ -36,9 +37,11 @@ export class LoginComponent implements OnInit {
   handleLogin() {
     keycloak.redirectUri = window.location.origin + "/profile";  
     keycloak.login().then(() => {
+      const token = keycloak.token;
+      StorageUtil.sessionStorageSave('token', token);
     });
-    console.log("idToken2: " +  this.oauthService.getIdToken());
-    console.log("userprofile2: " +  this.oauthService.loadUserProfile());
+    //console.log("idToken2: " +  this.oauthService.getIdToken());
+    //console.log("userprofile2: " +  this.oauthService.loadUserProfile());
   }
 
   get token(){
@@ -52,10 +55,5 @@ export class LoginComponent implements OnInit {
     }
     return null
   }
-
-  handleLoginGuest () {
-
-  }
-
 }
 
