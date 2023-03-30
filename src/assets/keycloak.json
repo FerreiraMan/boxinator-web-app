@@ -1,8 +1,8 @@
 {
-  "realm": "boxinator-app",
-  "auth-server-url": "https://lemur-3.cloud-iam.com/auth/",
+  "realm": "boxinator-application",
+  "auth-server-url": "https://lemur-4.cloud-iam.com/auth/",
   "ssl-required": "external",
-  "resource": "boxinator_User",
+  "resource": "user-boxinator",
   "public-client": true,
   "confidential-port": 0
 }
