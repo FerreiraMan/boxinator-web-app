@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import { Observable } from 'rxjs';
 import keycloak from 'src/keycloak';
-import { Profile } from './models/profile.model';
+import { Profile } from '../models/profile.model';
 
 @Injectable({
   providedIn: 'root'
