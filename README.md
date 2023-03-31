@@ -1,27 +1,18 @@
 # BoxinatorApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+This is the user manual for the Angular Boxinator Web Application, which allows users to create and track shipments of mystery boxes to various addresses around the world. The system has a web front-end, an API that communicates with the database, and a relational database. Users can create accounts to track ongoing and previous shipments.
 
-## Development server
+## Installation and Setup
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Clone the front-end and back-end repositories:
+    Back-end: https://gitlab.com/java-pedro-ferreira-pt/boxinator-backend
 
-## Code scaffolding
+2. For the front-end, open Git Bash inside the project folder and run npm install and then ng-serve.
+3. For the back-end, open the project and run the Spring Boot application.
+4. Open a browser and navigate to http://localhost:4200/. The application should now be running.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
+ Please see the User manual contained on the repository for a detail step by step explanation of the application.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Authors
+Andrea Lorenzoni and Pedro Ferreira
